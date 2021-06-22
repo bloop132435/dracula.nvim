@@ -1,65 +1,45 @@
 let g:colors_name = 'dracula'
 
-let colors = {}
-let colors.fg        = ['#F8F8F2', 253]
-let colors.bglighter = ['#424450', 238]
-let colors.bglight   = ['#281a26', 237]
-let colors.bg        = ['#181A26', 236]
-let colors.bgdark    = ['#21222C', 235]
-let colors.bgdarker  = ['#191A21', 234]
-let colors.comment   = ['#6272A4',  61]
-let colors.selection = ['#44475A', 239]
-let colors.subtle    = ['#424450', 238]
-let colors.cyan      = ['#8BE9FD', 117]
-let colors.green     = ['#50FA7B',  84]
-let colors.orange    = ['#FFB86C', 215]
-let colors.pink      = ['#FF79C6', 212]
-let colors.purple    = ['#BD93F9', 141]
-let colors.red       = ['#FF5555', 203]
-let colors.yellow    = ['#F1FA8C', 228]
-let colors.color_0  = '#21222C'
-let colors.color_1  = '#FF5555'
-let colors.color_2  = '#50FA7B'
-let colors.color_3  = '#F1FA8C'
-let colors.color_4  = '#BD93F9'
-let colors.color_5  = '#FF79C6'
-let colors.color_6  = '#8BE9FD'
-let colors.color_7  = '#F8F8F2'
-let colors.color_8  = '#6272A4'
-let colors.color_9  = '#FF6E6E'
-let colors.color_10 = '#69FF94'
-let colors.color_11 = '#FFFFA5'
-let colors.color_12 = '#D6ACFF'
-let colors.color_13 = '#FF92DF'
-let colors.color_14 = '#A4FFFF'
-let colors.color_15 = '#FFFFFF'
 
-let s:fg        = colors.fg
-let s:bglighter = colors.bglighter
-let s:bglight   = colors.bglight
-let s:bg        = colors.bg
-let s:bgdark    = colors.bgdark
-let s:bgdarker  = colors.bgdarker
-let s:comment   = colors.comment
-let s:selection = colors.selection
-let s:subtle    = colors.subtle
-let s:cyan      = colors.cyan
-let s:green     = colors.green
-let s:orange    = colors.orange
-let s:pink      = colors.pink
-let s:purple    = colors.purple
-let s:red       = colors.red
-let s:yellow    = colors.yellow
+let s:fg        = ['#F8F8F2', 253]
+let s:bglighter = ['#424450', 238]
+let s:bglight   = ['#281a26', 237]
+let s:bg        = ['#181A26', 236]
+let s:bgdark    = ['#21222C', 235]
+let s:bgdarker  = ['#191A21', 234]
+let s:comment   = ['#6272A4',  61]
+let s:selection = ['#44475A', 239]
+let s:subtle    = ['#424450', 238]
+let s:cyan      = ['#8BE9FD', 117]
+let s:green     = ['#50FA7B',  84]
+let s:orange    = ['#FFB86C', 215]
+let s:pink      = ['#FF79C6', 212]
+let s:purple    = ['#BD93F9', 141]
+let s:red       = ['#FF5555', 203]
+let s:yellow    = ['#F1FA8C', 228]
+
+let g:terminal_color_0 =  "something"
+let g:terminal_color_1 =  "#21222C"
+let g:terminal_color_2 =  "#FF5555"
+let g:terminal_color_3 =  "#50FA7B"
+let g:terminal_color_4 =  "#F1FA8C"
+let g:terminal_color_5 =  "#BD93F9"
+let g:terminal_color_6 =  "#FF79C6"
+let g:terminal_color_7 =  "#8BE9FD"
+let g:terminal_color_8 =  "#F8F8F2"
+let g:terminal_color_9 =  "#6272A4"
+let g:terminal_color_10 =  "#FF6E6E"
+let g:terminal_color_11 =  "#69FF94"
+let g:terminal_color_12 =  "#FFFFA5"
+let g:terminal_color_13 =  "#D6ACFF"
+let g:terminal_color_14 =  "#FF92DF"
+let g:terminal_color_15 =  "#A4FFFF"
+let g:terminal_color_16 =  "#FFFFFF"
 
 let s:none      = ['NONE', 'NONE']
 
-if has('nvim')
-  for s:i in range(16)
-    let g:terminal_color_{s:i} = colors['color_' . s:i]
-  endfor
-endif
 
-" User Configuration: {{{2
+" User Configuration:
 
 let g:dracula_bold = 1
 
@@ -73,8 +53,7 @@ let g:dracula_inverse = 1
 
 let g:dracula_colorterm = 1
 
-"}}}2
-" Script Helpers: {{{2
+" Script Helpers: 2
 
 let s:attrs = {
       \ 'bold': g:dracula_bold == 1 ? 'bold' : 0,
@@ -110,8 +89,8 @@ function! s:h(scope, fg, ...) " bg, attr_list, special
   execute join(l:hl_string, ' ')
 endfunction
 
-"}}}2
-" Dracula Highlight Groups: {{{2
+
+" Dracula Highlight Groups:
 
 call s:h('DraculaBgLight', s:none, s:bglight)
 call s:h('DraculaBgLighter', s:none, s:bglighter)
@@ -171,10 +150,8 @@ call s:h('DraculaDiffChange', s:orange, s:none)
 call s:h('DraculaDiffText', s:bg, s:orange)
 call s:h('DraculaDiffDelete', s:red, s:bgdark)
 
-" }}}2
 
-" }}}
-" User Interface: {{{
+" User Interface:
 
 set background=dark
 
@@ -220,8 +197,7 @@ hi! link Visual       DraculaSelection
 hi! link VisualNOS    Visual
 hi! link WarningMsg   DraculaOrangeInverse
 
-" }}}
-" Syntax: {{{
+" Syntax:
 
 " Required as some plugins will overwrite
 call s:h('MatchParen', s:green, s:none, [s:attrs.underline])
@@ -294,7 +270,6 @@ hi! link helpCommand DraculaPurple
 hi! link helpExample DraculaGreen
 hi! link helpBacktick Special
 
-"}}}
 
 " # Misc
 hi! link TSPunctSpecial Special
@@ -322,4 +297,3 @@ hi! link TSUnderline Underlined
 hi! link TSTitle DraculaYellow
 hi! link TSLiteral DraculaYellow
 hi! link TSURI DraculaYellow
-" vim: fdm=marker ts=2 sts=2 sw=2 fdl=0 et:
