@@ -236,7 +236,7 @@ hi! link Type DraculaCyanItalic
 hi! link Delimiter DraculaFg
 
 hi! link Special DraculaPink
-hi! link SpecialComment DraculaCyanItalic
+hi! link SpecialComment DraculaCyan
 hi! link Tag DraculaCyan
 hi! link helpHyperTextJump DraculaLink
 hi! link helpCommand DraculaPurple
