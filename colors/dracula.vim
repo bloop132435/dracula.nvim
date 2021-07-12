@@ -1,22 +1,6 @@
 let g:colors_name = 'dracula'
 
-
-let s:fg        = ['#F8F8F2', 253]
-let s:bglighter = ['#424450', 238]
-let s:bglight   = ['#281a26', 237]
-let s:bg        = ['#181A26', 236]
-let s:bgdark    = ['#21222C', 235]
-let s:bgdarker  = ['#191A21', 234]
-let s:comment   = ['#6272A4',  61]
-let s:selection = ['#44475A', 239]
-let s:subtle    = ['#424450', 238]
-let s:cyan      = ['#8BE9FD', 117]
-let s:green     = ['#50FA7B',  84]
-let s:orange    = ['#FFB86C', 215]
-let s:pink      = ['#FF79C6', 212]
-let s:purple    = ['#BD93F9', 141]
-let s:red       = ['#FF5555', 203]
-let s:yellow    = ['#F1FA8C', 228]
+set background=dark
 
 let g:terminal_color_0  = '#21222C'
 let g:terminal_color_1  = '#FF5555'
@@ -35,112 +19,114 @@ let g:terminal_color_13 = '#FF92DF'
 let g:terminal_color_14 = '#A4FFFF'
 let g:terminal_color_15 = '#FFFFFF'
 
-let s:none      = ['NONE', 'NONE']
-
-
-
-" Script Helpers: 2
-
-
-function! s:h(scope, fg, ...) " bg, attr_list, special
-	let l:fg = copy(a:fg)
-	let l:bg = get(a:, 1, ['NONE', 'NONE'])
-
-	let l:attr_list = filter(get(a:, 2, ['NONE']), 'type(v:val) == 1')
-	let l:attrs = len(l:attr_list) > 0 ? join(l:attr_list, ',') : 'NONE'
-
-	" Falls back to coloring foreground group on terminals because
-	" nearly all do not support undercurl
-	let l:special = get(a:, 3, ['NONE', 'NONE'])
-	if l:special[0] !=# 'NONE' && l:fg[0] ==# 'NONE' && !has('gui_running')
-		let l:fg[0] = l:special[0]
-		let l:fg[1] = l:special[1]
-	endif
-
-	let l:hl_string = [
-				\ 'highlight', a:scope,
-				\ 'guifg=' . l:fg[0], 'ctermfg=' . l:fg[1],
-				\ 'guibg=' . l:bg[0], 'ctermbg=' . l:bg[1],
-				\ 'gui=' . l:attrs, 'cterm=' . l:attrs,
-				\ 'guisp=' . l:special[0],
-				\]
-
-	execute join(l:hl_string, ' ')
-endfunction
-
-
-" Dracula Highlight Groups:
-
-call s:h('DraculaBgLight', s:none, s:bglight)
-call s:h('DraculaBgLighter', s:none, s:bglighter)
-call s:h('DraculaBgDark', s:none, s:bgdark)
-call s:h('DraculaBgDarker', s:none, s:bgdarker)
-
-call s:h('DraculaFg', s:fg)
-call s:h('DraculaFgUnderline', s:fg, s:none, ["underline"])
-call s:h('DraculaFgBold', s:fg, s:none, ["bold"])
-
-call s:h('DraculaComment', s:comment)
-call s:h('DraculaCommentBold', s:comment, s:none, ["bold"])
-
-call s:h('DraculaSelection', s:none, s:selection)
-
-call s:h('DraculaSubtle', s:subtle)
-
-call s:h('DraculaCyan', s:cyan)
-call s:h('DraculaCyanItalic', s:cyan, s:none, ["italic"])
-
-call s:h('DraculaGreen', s:green)
-call s:h('DraculaGreenBold', s:green, s:none, ["bold"])
-call s:h('DraculaGreenItalic', s:green, s:none, ["italic"])
-call s:h('DraculaGreenItalicUnderline', s:green, s:none, ["italic", "underline"])
-
-call s:h('DraculaOrange', s:orange)
-call s:h('DraculaOrangeBold', s:orange, s:none, ["bold"])
-call s:h('DraculaOrangeItalic', s:orange, s:none, ["italic"])
-call s:h('DraculaOrangeBoldItalic', s:orange, s:none, ["bold", "italic"])
-call s:h('DraculaOrangeInverse', s:bg, s:orange)
-
-call s:h('DraculaPink', s:pink)
-call s:h('DraculaPinkItalic', s:pink, s:none, ["italic"])
-
-call s:h('DraculaPurple', s:purple)
-call s:h('DraculaPurpleBold', s:purple, s:none, ["bold"])
-call s:h('DraculaPurpleItalic', s:purple, s:none, ["italic"])
-
-call s:h('DraculaRed', s:red)
-call s:h('DraculaRedInverse', s:fg, s:red)
-
-call s:h('DraculaYellow', s:yellow)
-call s:h('DraculaYellowItalic', s:yellow, s:none, ["italic"])
-
-call s:h('DraculaError', s:red, s:none, [], s:red)
-
-call s:h('DraculaErrorLine', s:none, s:none, ["undercurl"], s:red)
-call s:h('DraculaWarnLine', s:none, s:none, ["undercurl"], s:orange)
-call s:h('DraculaInfoLine', s:none, s:none, ["undercurl"], s:cyan)
-
-call s:h('DraculaTodo', s:cyan, s:none, ["bold", "inverse"])
-call s:h('DraculaSearch', s:green, s:none, ["inverse"])
-call s:h('DraculaBoundary', s:comment, s:bgdark)
-call s:h('DraculaLink', s:cyan, s:none, ["underline"])
-
-call s:h('DraculaDiffChange', s:orange, s:none)
-call s:h('DraculaDiffText', s:bg, s:orange)
-call s:h('DraculaDiffDelete', s:red, s:bgdark)
-
-
-
-set background=dark
+highlight DraculaBgLight guifg=NONE ctermfg=NONE guibg=#281a26 ctermbg=237 gui=NONE cterm=NONE guisp=NONE
+highlight DraculaBgLighter guifg=NONE ctermfg=NONE guibg=#424450 ctermbg=238 gui=NONE cterm=NONE guisp=NONE
+highlight DraculaBgDark guifg=NONE ctermfg=NONE guibg=#21222C ctermbg=235 gui=NONE cterm=NONE guisp=NONE
+highlight DraculaBgDarker guifg=NONE ctermfg=NONE guibg=#191A21 ctermbg=234 gui=NONE cterm=NONE guisp=NONE
+highlight DraculaFg guifg=#F8F8F2 ctermfg=253 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE guisp=NONE
+highlight DraculaFgUnderline guifg=#F8F8F2 ctermfg=253 guibg=NONE ctermbg=NONE gui=underline cterm=underline guisp=NONE
+highlight DraculaFgBold guifg=#F8F8F2 ctermfg=253 guibg=NONE ctermbg=NONE gui=bold cterm=bold guisp=NONE
+highlight DraculaComment guifg=#6272A4 ctermfg=61 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE guisp=NONE
+highlight DraculaCommentBold guifg=#6272A4 ctermfg=61 guibg=NONE ctermbg=NONE gui=bold cterm=bold guisp=NONE
+highlight DraculaSelection guifg=NONE ctermfg=NONE guibg=#44475A ctermbg=239 gui=NONE cterm=NONE guisp=NONE
+highlight DraculaSubtle guifg=#424450 ctermfg=238 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE guisp=NONE
+highlight DraculaCyan guifg=#8BE9FD ctermfg=117 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE guisp=NONE
+highlight DraculaCyanItalic guifg=#8BE9FD ctermfg=117 guibg=NONE ctermbg=NONE gui=italic cterm=italic guisp=NONE
+highlight DraculaGreen guifg=#50FA7B ctermfg=84 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE guisp=NONE
+highlight DraculaGreenBold guifg=#50FA7B ctermfg=84 guibg=NONE ctermbg=NONE gui=bold cterm=bold guisp=NONE
+highlight DraculaGreenItalic guifg=#50FA7B ctermfg=84 guibg=NONE ctermbg=NONE gui=italic cterm=italic guisp=NONE
+highlight DraculaGreenItalicUnderline guifg=#50FA7B ctermfg=84 guibg=NONE ctermbg=NONE gui=italic,underline cterm=italic,underline guisp=NONE
+highlight DraculaOrange guifg=#FFB86C ctermfg=215 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE guisp=NONE
+highlight DraculaOrangeBold guifg=#FFB86C ctermfg=215 guibg=NONE ctermbg=NONE gui=bold cterm=bold guisp=NONE
+highlight DraculaOrangeItalic guifg=#FFB86C ctermfg=215 guibg=NONE ctermbg=NONE gui=italic cterm=italic guisp=NONE
+highlight DraculaOrangeBoldItalic guifg=#FFB86C ctermfg=215 guibg=NONE ctermbg=NONE gui=bold,italic cterm=bold,italic guisp=NONE
+highlight DraculaOrangeInverse guifg=#181A26 ctermfg=236 guibg=#FFB86C ctermbg=215 gui=NONE cterm=NONE guisp=NONE
+highlight DraculaPink guifg=#FF79C6 ctermfg=212 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE guisp=NONE
+highlight DraculaPinkItalic guifg=#FF79C6 ctermfg=212 guibg=NONE ctermbg=NONE gui=italic cterm=italic guisp=NONE
+highlight DraculaPurple guifg=#BD93F9 ctermfg=141 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE guisp=NONE
+highlight DraculaPurpleBold guifg=#BD93F9 ctermfg=141 guibg=NONE ctermbg=NONE gui=bold cterm=bold guisp=NONE
+highlight DraculaPurpleItalic guifg=#BD93F9 ctermfg=141 guibg=NONE ctermbg=NONE gui=italic cterm=italic guisp=NONE
+highlight DraculaRed guifg=#FF5555 ctermfg=203 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE guisp=NONE
+highlight DraculaRedInverse guifg=#F8F8F2 ctermfg=253 guibg=#FF5555 ctermbg=203 gui=NONE cterm=NONE guisp=NONE
+highlight DraculaYellow guifg=#F1FA8C ctermfg=228 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE guisp=NONE
+highlight DraculaYellowItalic guifg=#F1FA8C ctermfg=228 guibg=NONE ctermbg=NONE gui=italic cterm=italic guisp=NONE
+highlight DraculaError guifg=#FF5555 ctermfg=203 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE guisp=#FF5555
+highlight DraculaErrorLine guifg=#FF5555 ctermfg=203 guibg=NONE ctermbg=NONE gui=undercurl cterm=undercurl guisp=#FF5555
+highlight DraculaWarnLine guifg=#FFB86C ctermfg=215 guibg=NONE ctermbg=NONE gui=undercurl cterm=undercurl guisp=#FFB86C
+highlight DraculaInfoLine guifg=#8BE9FD ctermfg=117 guibg=NONE ctermbg=NONE gui=undercurl cterm=undercurl guisp=#8BE9FD
+highlight DraculaTodo guifg=#8BE9FD ctermfg=117 guibg=NONE ctermbg=NONE gui=bold,inverse cterm=bold,inverse guisp=NONE
+highlight DraculaSearch guifg=#50FA7B ctermfg=84 guibg=NONE ctermbg=NONE gui=inverse cterm=inverse guisp=NONE
+highlight DraculaBoundary guifg=#6272A4 ctermfg=61 guibg=#21222C ctermbg=235 gui=NONE cterm=NONE guisp=NONE
+highlight DraculaLink guifg=#8BE9FD ctermfg=117 guibg=NONE ctermbg=NONE gui=underline cterm=underline guisp=NONE
+highlight DraculaDiffChange guifg=#FFB86C ctermfg=215 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE guisp=NONE
+highlight DraculaDiffText guifg=#181A26 ctermfg=236 guibg=#FFB86C ctermbg=215 gui=NONE cterm=NONE guisp=NONE
+highlight DraculaDiffDelete guifg=#FF5555 ctermfg=203 guibg=#21222C ctermbg=235 gui=NONE cterm=NONE guisp=NONE
+highlight Normal guifg=#F8F8F2 ctermfg=253 guibg=#181A26 ctermbg=236 gui=NONE cterm=NONE guisp=NONE
+highlight StatusLine guifg=NONE ctermfg=NONE guibg=#424450 ctermbg=238 gui=bold cterm=bold guisp=NONE
+highlight StatusLineNC guifg=NONE ctermfg=NONE guibg=#281a26 ctermbg=237 gui=NONE cterm=NONE guisp=NONE
+highlight StatusLineTerm guifg=NONE ctermfg=NONE guibg=#424450 ctermbg=238 gui=bold cterm=bold guisp=NONE
+highlight StatusLineTermNC guifg=NONE ctermfg=NONE guibg=#281a26 ctermbg=237 gui=NONE cterm=NONE guisp=NONE
+highlight WildMenu guifg=#181A26 ctermfg=236 guibg=#BD93F9 ctermbg=141 gui=bold cterm=bold guisp=NONE
+highlight CursorLine guifg=NONE ctermfg=NONE guibg=#424450 ctermbg=238 gui=NONE cterm=NONE guisp=NONE
+highlight LineNr guifg=#6272A4 ctermfg=61 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE guisp=NONE
+highlight SignColumn guifg=#6272A4 ctermfg=61 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE guisp=NONE
+highlight MatchParen guifg=#50FA7B ctermfg=84 guibg=NONE ctermbg=NONE gui=underline cterm=underline guisp=NONE
+highlight Conceal guifg=#8BE9FD ctermfg=117 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE guisp=NONE
+highlight DraculaBgLight guifg=NONE ctermfg=NONE guibg=#281a26 ctermbg=237 gui=NONE cterm=NONE guisp=NONE
+highlight DraculaBgLighter guifg=NONE ctermfg=NONE guibg=#424450 ctermbg=238 gui=NONE cterm=NONE guisp=NONE
+highlight DraculaBgDark guifg=NONE ctermfg=NONE guibg=#21222C ctermbg=235 gui=NONE cterm=NONE guisp=NONE
+highlight DraculaBgDarker guifg=NONE ctermfg=NONE guibg=#191A21 ctermbg=234 gui=NONE cterm=NONE guisp=NONE
+highlight DraculaFg guifg=#F8F8F2 ctermfg=253 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE guisp=NONE
+highlight DraculaFgUnderline guifg=#F8F8F2 ctermfg=253 guibg=NONE ctermbg=NONE gui=underline cterm=underline guisp=NONE
+highlight DraculaFgBold guifg=#F8F8F2 ctermfg=253 guibg=NONE ctermbg=NONE gui=bold cterm=bold guisp=NONE
+highlight DraculaComment guifg=#6272A4 ctermfg=61 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE guisp=NONE
+highlight DraculaCommentBold guifg=#6272A4 ctermfg=61 guibg=NONE ctermbg=NONE gui=bold cterm=bold guisp=NONE
+highlight DraculaSelection guifg=NONE ctermfg=NONE guibg=#44475A ctermbg=239 gui=NONE cterm=NONE guisp=NONE
+highlight DraculaSubtle guifg=#424450 ctermfg=238 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE guisp=NONE
+highlight DraculaCyan guifg=#8BE9FD ctermfg=117 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE guisp=NONE
+highlight DraculaCyanItalic guifg=#8BE9FD ctermfg=117 guibg=NONE ctermbg=NONE gui=italic cterm=italic guisp=NONE
+highlight DraculaGreen guifg=#50FA7B ctermfg=84 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE guisp=NONE
+highlight DraculaGreenBold guifg=#50FA7B ctermfg=84 guibg=NONE ctermbg=NONE gui=bold cterm=bold guisp=NONE
+highlight DraculaGreenItalic guifg=#50FA7B ctermfg=84 guibg=NONE ctermbg=NONE gui=italic cterm=italic guisp=NONE
+highlight DraculaGreenItalicUnderline guifg=#50FA7B ctermfg=84 guibg=NONE ctermbg=NONE gui=italic,underline cterm=italic,underline guisp=NONE
+highlight DraculaOrange guifg=#FFB86C ctermfg=215 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE guisp=NONE
+highlight DraculaOrangeBold guifg=#FFB86C ctermfg=215 guibg=NONE ctermbg=NONE gui=bold cterm=bold guisp=NONE
+highlight DraculaOrangeItalic guifg=#FFB86C ctermfg=215 guibg=NONE ctermbg=NONE gui=italic cterm=italic guisp=NONE
+highlight DraculaOrangeBoldItalic guifg=#FFB86C ctermfg=215 guibg=NONE ctermbg=NONE gui=bold,italic cterm=bold,italic guisp=NONE
+highlight DraculaOrangeInverse guifg=#181A26 ctermfg=236 guibg=#FFB86C ctermbg=215 gui=NONE cterm=NONE guisp=NONE
+highlight DraculaPink guifg=#FF79C6 ctermfg=212 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE guisp=NONE
+highlight DraculaPinkItalic guifg=#FF79C6 ctermfg=212 guibg=NONE ctermbg=NONE gui=italic cterm=italic guisp=NONE
+highlight DraculaPurple guifg=#BD93F9 ctermfg=141 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE guisp=NONE
+highlight DraculaPurpleBold guifg=#BD93F9 ctermfg=141 guibg=NONE ctermbg=NONE gui=bold cterm=bold guisp=NONE
+highlight DraculaPurpleItalic guifg=#BD93F9 ctermfg=141 guibg=NONE ctermbg=NONE gui=italic cterm=italic guisp=NONE
+highlight DraculaRed guifg=#FF5555 ctermfg=203 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE guisp=NONE
+highlight DraculaRedInverse guifg=#F8F8F2 ctermfg=253 guibg=#FF5555 ctermbg=203 gui=NONE cterm=NONE guisp=NONE
+highlight DraculaYellow guifg=#F1FA8C ctermfg=228 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE guisp=NONE
+highlight DraculaYellowItalic guifg=#F1FA8C ctermfg=228 guibg=NONE ctermbg=NONE gui=italic cterm=italic guisp=NONE
+highlight DraculaError guifg=#FF5555 ctermfg=203 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE guisp=#FF5555
+highlight DraculaErrorLine guifg=#FF5555 ctermfg=203 guibg=NONE ctermbg=NONE gui=undercurl cterm=undercurl guisp=#FF5555
+highlight DraculaWarnLine guifg=#FFB86C ctermfg=215 guibg=NONE ctermbg=NONE gui=undercurl cterm=undercurl guisp=#FFB86C
+highlight DraculaInfoLine guifg=#8BE9FD ctermfg=117 guibg=NONE ctermbg=NONE gui=undercurl cterm=undercurl guisp=#8BE9FD
+highlight DraculaTodo guifg=#8BE9FD ctermfg=117 guibg=NONE ctermbg=NONE gui=bold,inverse cterm=bold,inverse guisp=NONE
+highlight DraculaSearch guifg=#50FA7B ctermfg=84 guibg=NONE ctermbg=NONE gui=inverse cterm=inverse guisp=NONE
+highlight DraculaBoundary guifg=#6272A4 ctermfg=61 guibg=#21222C ctermbg=235 gui=NONE cterm=NONE guisp=NONE
+highlight DraculaLink guifg=#8BE9FD ctermfg=117 guibg=NONE ctermbg=NONE gui=underline cterm=underline guisp=NONE
+highlight DraculaDiffChange guifg=#FFB86C ctermfg=215 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE guisp=NONE
+highlight DraculaDiffText guifg=#181A26 ctermfg=236 guibg=#FFB86C ctermbg=215 gui=NONE cterm=NONE guisp=NONE
+highlight DraculaDiffDelete guifg=#FF5555 ctermfg=203 guibg=#21222C ctermbg=235 gui=NONE cterm=NONE guisp=NONE
+highlight Normal guifg=#F8F8F2 ctermfg=253 guibg=#181A26 ctermbg=236 gui=NONE cterm=NONE guisp=NONE
+highlight StatusLine guifg=NONE ctermfg=NONE guibg=#424450 ctermbg=238 gui=bold cterm=bold guisp=NONE
+highlight StatusLineNC guifg=NONE ctermfg=NONE guibg=#281a26 ctermbg=237 gui=NONE cterm=NONE guisp=NONE
+highlight StatusLineTerm guifg=NONE ctermfg=NONE guibg=#424450 ctermbg=238 gui=bold cterm=bold guisp=NONE
+highlight StatusLineTermNC guifg=NONE ctermfg=NONE guibg=#281a26 ctermbg=237 gui=NONE cterm=NONE guisp=NONE
+highlight WildMenu guifg=#181A26 ctermfg=236 guibg=#BD93F9 ctermbg=141 gui=bold cterm=bold guisp=NONE
+highlight CursorLine guifg=NONE ctermfg=NONE guibg=#424450 ctermbg=238 gui=NONE cterm=NONE guisp=NONE
+highlight LineNr guifg=#6272A4 ctermfg=61 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE guisp=NONE
+highlight SignColumn guifg=#6272A4 ctermfg=61 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE guisp=NONE
+highlight MatchParen guifg=#50FA7B ctermfg=84 guibg=NONE ctermbg=NONE gui=underline cterm=underline guisp=NONE
+highlight Conceal guifg=#8BE9FD ctermfg=117 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE guisp=NONE
 
 " Required as some plugins will overwrite
-call s:h('Normal', s:fg,s:bg )
-call s:h('StatusLine', s:none, s:bglighter, ["bold"])
-call s:h('StatusLineNC', s:none, s:bglight)
-call s:h('StatusLineTerm', s:none, s:bglighter, ["bold"])
-call s:h('StatusLineTermNC', s:none, s:bglight)
-call s:h('WildMenu', s:bg, s:purple, ["bold"])
-call s:h('CursorLine', s:none, s:subtle)
 
 hi! link ColorColumn  DraculaBgDark
 hi! link CursorColumn CursorLine
@@ -156,7 +142,6 @@ hi! link ErrorMsg     DraculaRedInverse
 hi! link FoldColumn   DraculaSubtle
 hi! link Folded       DraculaBoundary
 hi! link IncSearch    DraculaOrangeInverse
-call s:h('LineNr', s:comment)
 hi! link MoreMsg      DraculaFgBold
 hi! link NonText      DraculaSubtle
 hi! link Pmenu        DraculaBgDark
@@ -165,7 +150,6 @@ hi! link PmenuSel     DraculaSelection
 hi! link PmenuThumb   DraculaSelection
 hi! link Question     DraculaFgBold
 hi! link Search       DraculaSearch
-call s:h('SignColumn', s:comment)
 hi! link TabLine      DraculaBoundary
 hi! link TabLineFill  DraculaBgDarker
 hi! link TabLineSel   Normal
@@ -178,8 +162,6 @@ hi! link WarningMsg   DraculaOrangeInverse
 " Syntax:
 
 " Required as some plugins will overwrite
-call s:h('MatchParen', s:green, s:none, ["underline"])
-call s:h('Conceal', s:cyan, s:none)
 
 hi! link SpecialKey DraculaRed
 hi! link LspReferenceText DraculaSelection
