@@ -19,7 +19,7 @@ let g:terminal_color_13 = '#FF92DF'
 let g:terminal_color_14 = '#A4FFFF'
 let g:terminal_color_15 = '#FFFFFF'
 
-highlight DraculaBgLight guifg=NONE ctermfg=NONE guibg=#281a26 ctermbg=237 gui=NONE cterm=NONE guisp=NONE
+highlight DraculaBgLight guifg=NONE ctermfg=NONE guibg=NONE ctermbg=237 gui=NONE cterm=NONE guisp=NONE
 highlight DraculaBgLighter guifg=NONE ctermfg=NONE guibg=#424450 ctermbg=238 gui=NONE cterm=NONE guisp=NONE
 highlight DraculaBgDark guifg=NONE ctermfg=NONE guibg=#21222C ctermbg=235 gui=NONE cterm=NONE guisp=NONE
 highlight DraculaBgDarker guifg=NONE ctermfg=NONE guibg=#191A21 ctermbg=234 gui=NONE cterm=NONE guisp=NONE
